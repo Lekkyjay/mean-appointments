@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const logger = require('morgan');
 
@@ -13,6 +14,12 @@ const indexRouter = require('./routes/index');		//use erm in index.js
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//Serve static file - This is mainly for production
+// app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'app',  'dist', 'app', 'index.html'))
+// })
 
 //Testing Route - home route
 app.get('/', (req, res) => {
@@ -43,10 +50,20 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use('/', indexRouter);
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
+//   app.get('/*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'app',  'dist', 'app', 'index.html'))
+//   })
+// } else {
+//   app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
+// }
+
 //Add other routers here
+app.use('/', indexRouter);
+
 
 app.listen(PORT, () => {
-  console.log('Server listening on port 3000');
+  console.log(`Server listening on port ${PORT}`);
   
 });
