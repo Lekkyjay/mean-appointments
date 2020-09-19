@@ -3,6 +3,8 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const logger = require('morgan');
 
+const PORT = process.env.PORT || 8080;
+
 //IMPORT ROUTES
 const indexRouter = require('./routes/index');		//use erm in index.js
 
@@ -44,7 +46,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 //Add other routers here
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('Server listening on port 3000');
   
 });
