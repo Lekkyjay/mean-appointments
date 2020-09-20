@@ -19,27 +19,13 @@ app.use(express.urlencoded({ extended: false }));
 //cors is needed to prevent any error when we are sending network request
 app.use(cors());
 
-//Serve static file - This is mainly for production
-// app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'app',  'dist', 'app', 'index.html'))
-// })
-
-//Testing Route - home route
-// app.get('/', (req, res) => {
-//   res.send('Hello Lekky Jay.!');
-// });
-
 const config = {
   dbHost: 'localhost',
   dbName: 'appointments-app',
   dbCollection: 'appointments'
 }
 
-const MONGODB_URI = 'mongodb+srv://admin:admin@cluster0.d68uh.gcp.mongodb.net/appointments-app?retryWrites=true&w=majority'
-
-
-MongoClient.connect(MONGODB_URI, {
+MongoClient.connect(process.env.MONGODB_URI || `mongodb://${config.dbHost}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -65,17 +51,6 @@ app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'app',  'dist', 'app', 'index.html'))
 })
-
-//Before deployment to production, test this.
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
-//   app.get('/*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'app',  'dist', 'app', 'index.html'))
-//   })
-// }
-
-
-
 
 
 app.listen(PORT, () => {
