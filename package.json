@@ -6,6 +6,9 @@
   "scripts": {
     "client": "cd app && ng serve",
     "start": "node app",
+    "install-client": "cd app && npm install",
+    "build-client": "cd app && ng build --prod",
+    "postinstall": "npm run install-client && npm run build-client",
     "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon app\" \"npm run client\""
   },
   "keywords": [],
@@ -17,5 +20,9 @@
     "express": "^4.17.1",
     "mongodb": "^3.6.2",
     "morgan": "^1.10.0"
+  },
+  "engines": {
+    "node": "12.16.3",
+    "npm": "6.14.4"
   }
 }
