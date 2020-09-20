@@ -1,0 +1,8 @@
+<div class="form-container">
+  <form class="form" (ngSubmit)="createAppointment()">
+    <input type="date" name="appointmentDate" [(ngModel)]="appointmentDate" placeholder="Choose a date">
+    <input type="text" name="name" [(ngModel)]="name" placeholder="name">
+    <input type="text"name="email" [(ngModel)]="email" placeholder="email">
+    <input type="submit" value="Make Appointment" class="btn">
+  </form>
+</div>

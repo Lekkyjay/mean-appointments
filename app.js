@@ -3,8 +3,9 @@ const app = express();
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const logger = require('morgan');
+const cors = require('cors');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 //IMPORT ROUTES
 const indexRouter = require('./routes/index');		//use erm in index.js
@@ -14,6 +15,9 @@ const indexRouter = require('./routes/index');		//use erm in index.js
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//cors is needed to prevent any error when we are sending network request
+app.use(cors());
 
 //Serve static file - This is mainly for production
 // app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
@@ -32,8 +36,10 @@ const config = {
   dbCollection: 'appointments'
 }
 
+const MONGODB_URI = 'mongodb+srv://admin:admin@cluster0.d68uh.gcp.mongodb.net/appointments-app?retryWrites=true&w=majority'
 
-MongoClient.connect(process.env.MONGODB_URI || `mongodb://${config.dbHost}`, {
+
+MongoClient.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -58,6 +64,7 @@ app.use((req, res, next) => {
 // } else {
 //   app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
 // }
+
 
 //Add other routers here
 app.use('/', indexRouter);
