@@ -21,14 +21,14 @@ export class AppointmentListComponent implements OnInit {
       .subscribe((appointments: Appointment[]) =>{
         this.appointments = appointments;
         this.loading = false;
-        console.log(this.appointments);
+        console.log('appointments ',this.appointments);
         console.log(this.loading);
       }, 
       (error: ErrorEvent) => {
         this.errorMsg = error.error.message;
         this.loading = false;
       });
-      
+
     // this.appointments = [
     //   {
     //     _id: '1',

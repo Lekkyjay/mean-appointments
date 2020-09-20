@@ -26,9 +26,9 @@ app.use(cors());
 // })
 
 //Testing Route - home route
-app.get('/', (req, res) => {
-  res.send('Hello Lekky Jay.!');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello Lekky Jay.!');
+// });
 
 const config = {
   dbHost: 'localhost',
@@ -56,18 +56,26 @@ app.use((req, res, next) => {
   next();
 })
 
+//Add other routers here
+app.use('/', indexRouter);
+
+
+//Set static files for server
+app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app',  'dist', 'app', 'index.html'))
+})
+
+//Before deployment to production, test this.
 // if (process.env.NODE_ENV === 'production') {
 //   app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
 //   app.get('/*', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'app',  'dist', 'app', 'index.html'))
 //   })
-// } else {
-//   app.use(express.static(path.join(__dirname, 'app', 'dist', 'app')));
 // }
 
 
-//Add other routers here
-app.use('/', indexRouter);
+
 
 
 app.listen(PORT, () => {
