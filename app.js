@@ -25,7 +25,7 @@ const config = {
   dbCollection: 'appointments'
 }
 
-MongoClient.connect(process.env.MONGODB_URI || `mongodb://${config.dbHost}`, {
+MongoClient.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
