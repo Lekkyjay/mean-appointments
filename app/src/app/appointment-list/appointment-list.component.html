@@ -1,5 +1,15 @@
-<div class="appointment-list" *ngFor="let appointment of appointments"> 
-  <div class="name">{{ appointment.name }}</div>
-  <div class="email">{{ appointment.email }}</div>
-  <div class="date">{{ appointment.appointmentDate | date: 'yyyy/MM/dd' }}</div>
+<div class="appointment-list-container">
+  <h1>Appointment Bookings</h1>
+  <div class="appointment-list-header"> 
+    <div class="name">Name</div>
+    <div class="email">Email</div>
+    <div class="date">Appointment Date</div>
+    <div class="cancel">Cancel</div>
+  </div>
+  <div class="appointment-list" *ngFor="let appointment of appointments"> 
+    <div class="name">{{ appointment.name }}</div>
+    <div class="email">{{ appointment.email }}</div>
+    <div class="date">{{ appointment.appointmentDate | date: 'yyyy/MM/dd' }}</div>
+    <div class="cancel">x</div>
+  </div>
 </div>
