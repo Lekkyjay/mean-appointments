@@ -4,6 +4,7 @@ const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const logger = require('morgan');
 const cors = require('cors');
+require('dotenv').config()
 
 const PORT = process.env.PORT || 3000;
 
@@ -37,7 +38,7 @@ MongoClient.connect(process.env.MONGODB_URI, {
 })
 
 app.use((req, res, next) => {
-  const collection = req.app.locals[config.dbCollection];
+  const collection = app.locals[config.dbCollection];
   req.collection = collection;
   next();
 })

@@ -39,7 +39,15 @@
   box-sizing: border-box;  
 }
 
-.appointment-list .cancel {
-  color: red;
+.appointment-list button {
+  color: aliceblue;
+  background: rgb(196, 79, 102);
+  border: 0;
+  border-radius: 5%;
+  padding: 2px 6px;
   cursor: pointer;
+}
+
+.appointment-list button:hover {
+  background: crimson;
 }
