@@ -31,6 +31,7 @@ export class AppointmentComponent implements OnInit {
         this.email = '';
         const appointmentDate = new Date(createdAppointment.appointmentDate).toDateString();
         this.successMsg = `Appointment booked successfully for ${appointmentDate}`;
+        this.appointmentService.onSuccess(this.successMsg)
       },
       (error: ErrorEvent) => {
         this.errorMsg = error.error.message;

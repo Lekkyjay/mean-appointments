@@ -1,5 +1,5 @@
 <header class="header">
   <nav>
-    <a routerLink="/">Home</a> | <a routerLink="/appointment-list">View Appointments</a>
+    <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a> | <a routerLink="/appointment-list" routerLinkActive="active">View Appointments</a>
   </nav>
 </header>

@@ -51,3 +51,7 @@
 .appointment-list button:hover {
   background: crimson;
 }
+
+.appointment-list .name, .appointment-list .email {
+  text-align: left;
+}

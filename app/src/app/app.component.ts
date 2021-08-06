@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  public options = {
+    timeOut: 3000,
+    showProgressBar: true,
+    pauseOnHover: true,
+    // clickToClose: true,
+    // clickIconToClose: true,
+    position: ["top", "right"]
+  }
 }

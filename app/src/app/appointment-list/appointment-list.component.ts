@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from '../appointments.service';
 import { Appointment } from '../models/Appointment';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-appointment-list',
@@ -19,15 +20,15 @@ export class AppointmentListComponent implements OnInit {
   ngOnInit(): void {
     this.appointmentService.getAppointments()
       .subscribe((appointments: Appointment[]) =>{
-        this.appointments = appointments;
+        this.appointments = appointments
         this.loading = false;
-        console.log('appointments ',this.appointments);
-        console.log(this.loading);
+        // console.log('appointments ',this.appointments)
+        // console.log(this.loading)
       }, 
       (error: ErrorEvent) => {
-        this.errorMsg = error.error.message;
-        this.loading = false;
-      });
+        this.errorMsg = error.error.message
+        this.loading = false
+      })
 
     // this.appointments = [
     //   {
@@ -73,6 +74,21 @@ export class AppointmentListComponent implements OnInit {
     //     email: 'biola@email.com'
     //   }
     // ]
+  }
+
+  cancelAppointment(id: string) {
+    this.appointmentService.cancelAppointment(id)
+      .pipe(
+        mergeMap(() => this.appointmentService.getAppointments())
+      )
+      .subscribe((appointments: Appointment[]) => {
+        this.appointments = appointments
+        this.successMsg = 'Appointment cancelled!'
+        this.appointmentService.onSuccess(this.successMsg)
+      },
+      (error: ErrorEvent) => {
+        this.errorMsg = error.error.message
+      })
   }
 
 }

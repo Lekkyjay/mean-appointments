@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Appointment } from './models/Appointment';
+import { NotificationsService } from 'angular2-notifications';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AppointmentsService {
 
   private BASE_URL = environment.API_URL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private notifyService: NotificationsService) { }
 
   getAppointments(): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.BASE_URL}/appointments`);
@@ -23,6 +24,14 @@ export class AppointmentsService {
 
   cancelAppointment(id: string): Observable<any> {
     return this.http.delete(`${this.BASE_URL}/appointments/${id}`);
+  }
+
+  onSuccess(msg) {
+    this.notifyService.success('Success', msg)
+  }
+
+  onError(msg) {
+    this.notifyService.error('Error', msg)
   }
 
 }
